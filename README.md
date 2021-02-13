@@ -1,5 +1,5 @@
 # jsutilities
-JS utilities with some CSS    
+JS utilities  
 
 Most of these functions/mothods require JQuery to work  
 Each time you read if(variable === undefined) is because of IE  

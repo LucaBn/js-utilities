@@ -120,7 +120,7 @@ var gl = {
         dummy.select();
         document.execCommand("copy");
         document.body.removeChild(dummy);
-        open_popup("Link copiato", 3000);
+        // console.log("Copied!");
     },
 
     random_number: function(from, to) {
