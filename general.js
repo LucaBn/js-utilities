@@ -202,7 +202,7 @@ var gl = {
 }
 
 // Run gl.copy_to_clipboard on elements with .ctc-this class, the content of data-link attribute will be passed and saved
-$('body').on('click', '.ctc-this', function () {
+$('body').on('click', '.ctc-this', function() {
 	gl.copy_to_clipboard($(this).attr("data-link"));
 });
 
@@ -293,35 +293,30 @@ var share = {
 	 - add onclick(function_name("url_to_share")) to the html element
 	 - add .js-fb-share .js-tw-share .js-li-share classes and data-share-url attribute to the html element
 	*/
-	facebook:function(url) {
+	facebook: function(url) {
 		var res = encodeURIComponent(url);
-		var fb = "https://www.facebook.com/sharer/sharer.php?u=";
-		var risultato = fb.concat(res);
-		window.open(risultato);
+		var generated_link = "https://www.facebook.com/sharer/sharer.php?u="+res;
+		window.open(generated_link);
 	},
-	twitter: function(url) {
+	twitter: function(url, text) {
 		var res = encodeURIComponent(url);
-		var tw = "https://twitter.com/intent/tweet?text=&url=";
-		var risultato = tw.concat(res);
-		window.open(risultato);
+		var generated_link = "https://twitter.com/intent/tweet?text="+text+"&url="+res;
+		window.open(generated_link);
 	},
-	linkedin: function(url) {
+	linkedin: function(url, text) {
 		var res = encodeURIComponent(url);
-		var lk = "https://www.linkedin.com/shareArticle?mini=true&title=&url=";
-		var risultato = lk.concat(res);
-		window.open(risultato);
+		var generated_link = "https://www.linkedin.com/shareArticle?mini=true&title="+text+"&url="+res;
+		window.open(generated_link);
 	},
 	whatsapp: function(url) {
 		var res = encodeURIComponent(url);
-		var wa = "whatsapp://send?text=";
-		var risultato = wa.concat(res);
-		window.open(risultato);
+		var generated_link = "whatsapp://send?text="+res;
+		window.open(generated_link);
 	},
 	telegram: function(url) {
 		var res = encodeURIComponent(url);
-		var tg = "https://t.me/share/url?url=";
-		var risultato = tg.concat(res);
-		window.open(risultato);
+		var generated_link = "https://t.me/share/url?url="+res;
+		window.open(generated_link);
 	}
 }
 
