@@ -22,7 +22,7 @@ $.fn.isInViewport = function(margin) {
 // Back to top/bottom animation
 var scroll_to_position = {
 	starting_position: 0,
-	animate: function(margin, speed) {
+	start: function(margin, speed) {
 		$('html, body').animate({scrollTop: margin}, speed);
 	},
 	back_to_top: function(margin, speed) {
@@ -33,7 +33,7 @@ var scroll_to_position = {
 			speed = "medium";
 		}
 		scroll_to_position.starting_position = window.scrollY;
-		animate(margin, speed);
+		scroll_to_position.start(margin, speed);
 	},
 	back_to_bottom: function(margin, speed) {
 		if(margin === undefined) {
@@ -43,7 +43,7 @@ var scroll_to_position = {
 			speed = "medium";
 		}
 		// When you call scroll_to_position.back_to_top method starting position is saved in scroll_to_position.starting_position, it can be used to go back to that point
-		animate((scroll_to_position.starting_position + margin), speed);
+		scroll_to_position.start((scroll_to_position.starting_position + margin), speed);
 	}
 }
 $("body").on("click", ".back-to-top", function() {
