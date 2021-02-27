@@ -1,4 +1,4 @@
-# jsutilities
+# js-utilities
 JS utilities  
 
 Most of these functions/methods require JQuery to work  
