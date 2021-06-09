@@ -122,12 +122,31 @@ var storage_handler = {
 /* URLs handler */
 var urls_handler = {
 	curr_url: location.href,
+	url_protocol: location.protocol,
+	base_url: location.origin,
+	url_path: location.pathname,
+	url_hash: location.hash,
 	curr_url_has_vars: function() { // Use this to detect Home Page
 		if(location.pathname == "" || location.pathname == "/" || location.pathname == "/index.php") {
 			return false;
 		} else {
 			return true;
 		}
+	},
+	get_parameter: function(url, parameter) {
+		return new URL(url).searchParams.get(parameter);
+	},
+	get_all_parameters: function(url) {
+		var params = {};
+		var parser = document.createElement('a');
+		parser.href = url;
+		var query = parser.search.substring(1);
+		var vars = query.split('&');
+		for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split('=');
+			params[pair[0]] = decodeURIComponent(pair[1]);
+		}
+		return params;
 	}
 }
 
