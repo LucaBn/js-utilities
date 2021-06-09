@@ -357,8 +357,8 @@ var date_handler = {
 var share = {
 	/*
 	 We have two possibilities to share a page on facebook/twitter/linkedin/etc:
-	 - add onclick(function_name("url_to_share")) to the html element
-	 - add .js-fb-share .js-tw-share .js-li-share classes and data-share-url attribute to the html element
+	 - add onclick(function_name("url_to_share", "text_to_share")) to the html element
+	 - add .js-fb-share .js-tw-share .js-li-share .js-wa-share .js-tg-share classes and data-share-url data-share-text attributes to the html element
 	*/
 	facebook: function(url) {
 		var res = encodeURIComponent(url);
@@ -366,23 +366,35 @@ var share = {
 		window.open(generated_link);
 	},
 	twitter: function(url, text) {
+		if(text === undefined) {
+			text = "";
+		}
 		var res = encodeURIComponent(url);
 		var generated_link = "https://twitter.com/intent/tweet?text="+text+"&url="+res;
 		window.open(generated_link);
 	},
 	linkedin: function(url, text) {
+		if(text === undefined) {
+			text = "";
+		}
 		var res = encodeURIComponent(url);
 		var generated_link = "https://www.linkedin.com/shareArticle?mini=true&title="+text+"&url="+res;
 		window.open(generated_link);
 	},
-	whatsapp: function(url) {
+	whatsapp: function(url, text) {
+		if(text === undefined) {
+			text = "";
+		}
 		var res = encodeURIComponent(url);
-		var generated_link = "whatsapp://send?text="+res;
+		var generated_link = "whatsapp://send?text="+text+" "+res;
 		window.open(generated_link);
 	},
-	telegram: function(url) {
+	telegram: function(url, text) {
+		if(text === undefined) {
+			text = "";
+		}
 		var res = encodeURIComponent(url);
-		var generated_link = "https://t.me/share/url?url="+res;
+		var generated_link = "https://t.me/share/url?url="+res+"&text="+text;
 		window.open(generated_link);
 	}
 }
