@@ -386,7 +386,7 @@ var share = {
 			text = "";
 		}
 		var res = encodeURIComponent(url);
-		var generated_link = "whatsapp://send?text="+text+" "+res;
+		var generated_link = "https://wa.me/?text="+text+" "+res;
 		window.open(generated_link);
 	},
 	telegram: function(url, text) {
