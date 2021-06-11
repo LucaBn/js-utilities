@@ -5,7 +5,7 @@
 */
 
 // Detect if element is in viewport
-$.fn.isInViewport = function(margin) {
+$.fn.is_in_viewport = function(margin) {
 	if(margin === undefined) {
 		margin = 0;
 	}
@@ -167,7 +167,7 @@ var gl = {
 	// Lazy load: loads images when they get close to viewport (or if they should be already visible when the page loads), called on scroll/resize
 	lazy_load_picture: function() {
 		$('img[realsrc]').each(function() {
-			if($(this).isInViewport() || $(this).isInViewport(-500)) {
+			if($(this).is_in_viewport() || $(this).is_in_viewport(-500)) {
 				var t = $(this);
 				t.attr('src', t.attr('realsrc'));
 				t.removeAttr('realsrc');
