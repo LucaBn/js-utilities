@@ -4,21 +4,6 @@
 	Always use var because of IE
 */
 
-// Detect if element is in viewport
-$.fn.is_in_viewport = function(margin) {
-	if(margin === undefined) {
-		margin = 0;
-	}
-
-	var elementTop = $(this).offset().top + margin;
-	var elementBottom = elementTop + $(this).outerHeight();
-
-	var viewportTop = $(window).scrollTop();
-	var viewportBottom = viewportTop + $(window).height();
-
-	return elementBottom > viewportTop && elementTop < viewportBottom;
-};
-
 // Back to top/bottom animation
 var scroll_to_position = {
 	starting_position: 0,
@@ -164,10 +149,25 @@ var gl = {
 	// Detect if IE
 	is_ie: !!document.documentMode,
 
+	// Detect if element is in viewport
+	is_in_viewport: function(el, margin) {
+		if(margin === undefined) {
+			margin = 0;
+		}
+
+		var elementTop = el.offset().top + margin;
+		var elementBottom = elementTop + el.outerHeight();
+
+		var viewportTop = $(window).scrollTop();
+		var viewportBottom = viewportTop + $(window).height();
+
+		return elementBottom > viewportTop && elementTop < viewportBottom;
+	}
+	
 	// Lazy load: loads images when they get close to viewport (or if they should be already visible when the page loads), called on scroll/resize
 	lazy_load_picture: function() {
 		$('img[realsrc]').each(function() {
-			if($(this).is_in_viewport() || $(this).is_in_viewport(-500)) {
+			if(gl.is_in_viewport($(this)) || gl.is_in_viewport($(this), -500)) {
 				var t = $(this);
 				t.attr('src', t.attr('realsrc'));
 				t.removeAttr('realsrc');
