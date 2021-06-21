@@ -163,7 +163,7 @@ var gl = {
 		var viewportBottom = viewportTop + $(window).height();
 
 		return elementBottom > viewportTop && elementTop < viewportBottom;
-	}
+	},
 	
 	// Lazy load: loads images when they get close to viewport (or if they should be already visible when the page loads), called on scroll/resize
 	lazy_load_picture: function() {
