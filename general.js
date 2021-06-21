@@ -135,6 +135,7 @@ var urls_handler = {
 	}
 }
 
+/* Global */
 var gl = {
 	// Detect if tablet
 	is_tablet: /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(navigator.userAgent.toLowerCase()),
@@ -198,28 +199,6 @@ var gl = {
 		return Math.floor(Math.random()*(to-from+1)+from);
 	},
 
-	random_element_from_array: function(array) {
-		return array[Math.floor(Math.random()*array.length)];
-	},
-
-	shuffle_array: function(array) {
-		var currentIndex = array.length, temporaryValue, randomIndex;
-
-		// While there are elements to shuffle
-		while (0 !== currentIndex) {
-			// Pick an element
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex -= 1;
-
-			// And swap it with the current element
-			temporaryValue = array[currentIndex];
-			array[currentIndex] = array[randomIndex];
-			array[randomIndex] = temporaryValue;
-		}
-
-		return array;
-	},
-
 	check_key: function(e) {
 		e = e || window.event;
 
@@ -270,14 +249,45 @@ $('body').on('click', '.ctc-this', function() {
 	gl.copy_to_clipboard($(this).attr("data-link"));
 });
 
+/* Array utilities */
+var array_handler = {
+	get_last_element: function(array) {
+		var keys = Object.keys(array);
+		return  array[keys[keys.length - 1]];
+	},
+
+	get_random_element: function(array) {
+		return array[Math.floor(Math.random() * array.length)];
+	},
+
+	shuffle: function(array) {
+		var currentIndex = array.length, temporaryValue, randomIndex;
+
+		// While there are elements to shuffle
+		while(0 !== currentIndex) {
+			// Pick an element
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
+
+			// And swap it with the current element
+			temporaryValue = array[currentIndex];
+			array[currentIndex] = array[randomIndex];
+			array[randomIndex] = temporaryValue;
+		}
+
+		return array;
+	}
+}
+
+/* Date utilities */
 var date_handler = {
-	today: Date.now(),
+	now: Date.now(),
 	current_year: new Date().getUTCFullYear(),
 	current_month: new Date().getUTCMonth() + 1, // Months from 1-12
 	current_day: new Date().getUTCDate(),
 
-	update_today: function() { // Update date_handler.today
-		date_handler.today = Date.now();
+	update_now: function() { // Update date_handler.now
+		date_handler.now = Date.now();
 	},
 
 	get_date: function(days_offset, as_string, date_separator) { // days_offset [int] (it can also be negative for past dates), as_string [boolean], date_separator [string]
@@ -424,6 +434,8 @@ function get_all_obj() {
 	console.log(urls_handler);
 	console.log("var gl");
 	console.log(gl);
+	console.log("var array_handler");
+	console.log(array_handler);
 	console.log("var date_handler");
 	console.log(date_handler);
 	console.log("var share");
